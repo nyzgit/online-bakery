@@ -6,7 +6,6 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.hiber.backend.dao.CategoryDAO;
@@ -14,80 +13,69 @@ import com.niit.hiber.backend.dto.Category;
 
 
 @Repository("categoryDAO")
-@Transactional(propagation = Propagation.SUPPORTS, readOnly=false)
+@Transactional
 public class CategoryDAOImpl implements CategoryDAO {
 
 	
 
 	@Autowired
-	private SessionFactory sessionFactory;
-	
-	private static List<Category> categories = new ArrayList<Category>();
+	SessionFactory sessionFactory;
 
-	
-
+	/*
+	 * Method for List all products.
+	 * */
 	@SuppressWarnings("unchecked")
 	public List<Category> list() {
-		categories = (List<Category>)sessionFactory.openSession().createQuery("FROM Category").list();
-		/*for(Product pro : products)
-		{
-			System.out.println(pro.getPname());
-		}*/
-		return categories;
-	}
 
+		return sessionFactory.getCurrentSession().createQuery("from Product where active = TRUE").list();
+	}
+	
+	/*
+	 * Method to product by ID
+	 * */
 	public Category get(int id) {
-		for(Category category : categories)
-		{
-			if(category.getId() == id) return category;
-		}
-		return null;
+
+		Category category = sessionFactory.getCurrentSession().get(Category.class, Integer.valueOf(id));
+		return category;
+
 	}
 
-	
-	
-	
-	@Transactional
+	/*
+	 * Method to add product in the table.
+	 * */
 	public boolean add(Category category) {
-
-		try	
-		{
+		try {
 			sessionFactory.getCurrentSession().persist(category);
-			
-			
 			return true;
-		}catch(Exception ex)
-		{
-			ex.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
-		
-		
-		
-		
-		// TODO Auto-generated method stub
-		//return false;
 	}
-	
-	@Transactional
+
+	/*
+	 * Method to update Product.
+	 * */
 	public boolean update(Category category) {
-	
-		try	
-		{
+		try {
+			
 			sessionFactory.getCurrentSession().update(category);
-			
-			
 			return true;
-		}catch(Exception ex)
-		{
-			ex.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 	}
+
+
 
 	public boolean delete(Category category) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+
+
+	
 
 }

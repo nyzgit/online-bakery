@@ -34,8 +34,8 @@ public class CategoryTestCase {
 	public void testAddCategory()
 	{
 		category = new Category();
-		category.setName("cakes");
-		category.setDescription("this is cakes.");
+		category.setName("cupcake");
+		category.setDescription("this is pastry.");
 		category.setImageUrl("CAT_1.png");
 		assertEquals("Successfully added a category inside the table", true,categoryDAO.add(category));
 	}*/
@@ -43,7 +43,7 @@ public class CategoryTestCase {
 	@Test
 	public void testUpdateCategory()
 	{
-		category = categoryDAO.get(0);
+		category = categoryDAO.get(2);
 		category.setName("apple");
 		assertEquals("Successfully updated a category in the table", true,categoryDAO.update(category));
 	}
