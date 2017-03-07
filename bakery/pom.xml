@@ -16,7 +16,7 @@
 
 	<dependencies>
 
-<!--Linking Backend with FrontEnd  -->
+		<!--Linking Backend with FrontEnd -->
 		<dependency>
 			<groupId>com.niit</groupId>
 			<artifactId>backend</artifactId>
@@ -36,6 +36,21 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- SPRING DEPENDENCY -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<!-- JSTL DEPENDENCIES -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		
 
 	</dependencies>
 
